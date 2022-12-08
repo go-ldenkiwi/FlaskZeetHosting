@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="kor">
+    <head>
+        <meta charset = "UTF-8">
+        <title> 파이어베이스 테스트 </title>
+        
+    </head>
+
+    <body>
+        
+        <style>
+            table {
+                width: 300px;
+                border-collapse: collapse;
+            }
+            th, td {
+                height: 20px;
+                padding: 3px;
+                text-align: center;
+                border-bottom: 1px solid #dadada;
+            }
+            th {
+                background-color: #f3f3f3;
+            }
+            tr:nth-child(even) {
+                background-color: #f3f3f3;
+            }
+            tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+            #tbody {
+                height: 400px;
+                overflow-y: scroll;
+            }
+      
+
+        </style>    
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>UserID</th>
+                    <th>SongIndex</th>
+                    <th>PlayCount</th>
+                    <th>  </th>
+                </tr>
+            </thead>
+       
+            <tbody>
+                {% for key, value in data.items() %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ data[key]['userId'] }}</td>
+                        <td>{{ data[key]['songIndex'] }}</td>
+                        <td>{{ data[key]['playCount'] }}</td>
+                            
+                        <td><form action="/delete/{{ key }}" method="POST">
+                                <input type="submit" value="delete">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+       
+        <div>단일 추가
+            <form action="/add" method="post">
+                UserID : (user)<input name='userId' type='text'/><br>
+                SongIndex : <input name='songIndex' type='text'/><br>
+                PlayCount : <input name='playCount' type='text'/><br>
+                <input type="submit" value="추가">
+            </form>
+        </div>
+        </br></br>
+        <div>랜덤 데이터 다중 추가
+            <form action="/randadd" method="post">
+                <input name='idNum' type='text'/>번의 UserID로<br>
+                <input name='indexNum' type='text'/>번까지의 SongIndex를<br>
+                <input name='countNum' type='text'/>회 재생함을<br>
+                <input name='num' type='text'/>번<br>
+                <input type="submit" value="추가">
+            </form>
+        </div>
+        
+    </body>
+</html>
+        
